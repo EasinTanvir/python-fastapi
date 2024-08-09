@@ -11,12 +11,18 @@ class CreateUser(BaseModel) :
      email : str
      password : str
      
+class LoginUser(BaseModel) :   
+    
+     email : str
+     password : str
+     
 
      
 class ShowUser(BaseModel) :
      username : str
      email : str
      blogs : List[CreateBlog]
+    
      
 
      
@@ -33,3 +39,10 @@ class CreateSeconBlog(BaseModel) :
     title : Optional[str] = None
     desc : Optional[str] = None
     
+    
+class Token(BaseModel):
+    access_token: str
+    token_type: str
+    
+class TokenData(BaseModel):
+    username: str | None = None

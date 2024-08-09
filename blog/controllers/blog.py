@@ -2,6 +2,8 @@ from fastapi import  HTTPException, status, Response
 from ..schema import CreateBlog, CreateSeconBlog, ShowBlog
 from ..database import db_dependency
 from .. import models  
+from .. import protectRoute  
+
  
 def all_posts_contrl(db : db_dependency) :
    return db.query(models.Blog).all()

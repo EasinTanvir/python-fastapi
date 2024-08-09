@@ -5,3 +5,4 @@ pymysql
 passlib
 pyjwt
 bcrypt
+python-multipart

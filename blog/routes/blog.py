@@ -1,8 +1,9 @@
-from fastapi import APIRouter,   Response, status
+from fastapi import APIRouter,   Response, status, Depends
 from typing import  List
-from ..schema import CreateBlog, CreateSeconBlog, ShowBlog
+from ..schema import CreateBlog, CreateSeconBlog, ShowBlog, CreateUser
 from ..database import db_dependency
 from ..controllers import blog
+from ..protectRoute import get_current_user
 
 router = APIRouter(
    prefix='/blog',
@@ -10,11 +11,11 @@ router = APIRouter(
 )
 
 @router.get("/", response_model=List[ShowBlog])
-def get_all_blogs(db:db_dependency) :
+def get_all_blogs(db:db_dependency, get_current_user:CreateUser = Depends(get_current_user) ) :
    return blog.all_posts_contrl(db)
 
 @router.get("/{id}", response_model=ShowBlog)
-def get_blog(id:int, db:db_dependency,) :
+def get_blog(id:int, db:db_dependency, get_current_user:CreateUser = Depends(get_current_user) ) :
    return blog.get_single_post(db, id)
   
 @router.put("/{id}")
